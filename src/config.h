@@ -8,10 +8,8 @@
 #define SERVO_TILT_PIN 9
 
 // Face Colors
-#define COLOR_BG M5.Lcd.color565(255, 204, 0) // Yellowish
+#define COLOR_BG M5.Lcd.color565(255, 255, 255) // White
 #define COLOR_FG TFT_BLACK
 
 // AP Settings for Config
 #define AP_SSID "StackChan_Config"
-
-

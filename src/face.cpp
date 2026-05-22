@@ -7,6 +7,7 @@ static unsigned long lastUpdate = 0;
 static bool blinkState = false;
 
 void initFace() {
+    M5.Lcd.setBrightness(255); // Max brightness for better visibility
     M5.Lcd.fillScreen(COLOR_BG);
     setFaceMode(FACE_NORMAL);
 }
@@ -77,4 +78,3 @@ void updateFace() {
         }
     }
 }
-

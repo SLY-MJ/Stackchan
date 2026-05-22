@@ -23,34 +23,17 @@ bool connectWiFi() {
     String pass = prefs.getString("pass", "");
     prefs.end();
 
-    if (ssid.length() == 0) return false;
+    if (ssid.length() == 0) {
+        return false;
+    }
 
-    M5.Lcd.fillScreen(TFT_BLACK);
-    M5.Lcd.setCursor(0, 0);
-    M5.Lcd.setTextColor(TFT_WHITE);
-    M5.Lcd.setTextSize(2);
-    M5.Lcd.printf("Connecting to:\n%s", ssid.c_str());
-
-    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid.c_str(), pass.c_str());
-
-    int timeout = 20; // 10 seconds
-    while (WiFi.status() != WL_CONNECTED && timeout > 0) {
+    int retry = 0;
+    while (WiFi.status() != WL_CONNECTED && retry < 20) {
         delay(500);
-        M5.Lcd.print(".");
-        timeout--;
+        retry++;
     }
-
-    if (WiFi.status() == WL_CONNECTED) {
-        M5.Lcd.println("\nConnected!");
-        M5.Lcd.println(WiFi.localIP().toString());
-        delay(2000);
-        return true;
-    }
-
-    M5.Lcd.println("\nFailed!");
-    delay(2000);
-    return false;
+    return WiFi.status() == WL_CONNECTED;
 }
 
 void handleRoot() {
